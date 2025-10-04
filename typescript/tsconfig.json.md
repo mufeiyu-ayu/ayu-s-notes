@@ -217,21 +217,21 @@ export const rules = {
 
 ### 生态包
 
-#### 1.SimplyTyped:
+#### 1.SimplyTyped
 
 - 是一个轻量级的 TypeScript 类型工具库 [2](https://stackoverflow.com/questions/9338709/what-is-dependent-typing)
 - 安装方式：`npm install --save-dev simplytyped` [2](https://stackoverflow.com/questions/9338709/what-is-dependent-typing)
 - 支持 Deno 环境使用 [2](https://stackoverflow.com/questions/9338709/what-is-dependent-typing)
 - 持续维护和更新，有定期的版本发布 [3](https://www.reddit.com/r/Python/comments/qofmt3/is_there_any_language_that_is_as_similar_as/)
 
-#### 2.utility-types:
+#### 2.utility-types
 
 - 提供了完整的内置类型声明 [2](https://stackoverflow.com/questions/9338709/what-is-dependent-typing)\_2
 - 支持 npm 和 yarn 两种安装方式 [2](https://stackoverflow.com/questions/9338709/what-is-dependent-typing)\_2
 - 被推荐作为开发依赖（devDependencies）安装 [3](https://www.reddit.com/r/Python/comments/qofmt3/is_there_any_language_that_is_as_similar_as/)\_2
 - 在社区中使用广泛，文档完善 [4](https://github.com/andnp/SimplyTyped/releases)\_2
 
-#### 3.[ts-toolbelt](https://millsp.github.io/ts-toolbelt/):
+#### 3.[ts-toolbelt](https://millsp.github.io/ts-toolbelt/)
 
 - 提供更多高级类型操作功能 [5](https://news.ycombinator.com/item?id=15384351)\_2
 - 通过 `npm install ts-toolbelt --save` 安装 [4](https://github.com/andnp/SimplyTyped/releases)\_2
