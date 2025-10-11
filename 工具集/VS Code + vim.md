@@ -1,6 +1,6 @@
-![[Pasted image 20251010151151.png]]
-![[Pasted image 20251011104033.png]]![[Pasted image 20251011104226.png]]
-![[Pasted image 20251011154701.png]]
-![[Pasted image 20251011154858.png]]
+121![[IMG-20251011175722467.png]]
+![[IMG-20251011175722485.png]]![[IMG-20251011175722504.png]]
+![[IMG-20251011175722517.png]]
+![[IMG-20251011175722529.png]]
 ![[Pasted image 20251011161323.png
-![[Pasted image 20251011160959.png]]
+![[IMG-20251011175722540.png]]
