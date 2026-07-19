@@ -1,3 +1,4 @@
 .obsidian
 .gitignore
+.DS_Store
 config/*
