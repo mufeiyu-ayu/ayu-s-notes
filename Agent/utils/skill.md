@@ -21,6 +21,7 @@
 | --- | --- | --- | --- |
 | 反过度工程化插件 | `ponytail` | 控制 Codex 少写无必要代码、少加抽象、少引入依赖 | 默认关闭，需要时 `@ponytail lite` 或 `@ponytail-review` |
 | 前端设计质量 skill | `$impeccable` | UI 评审、打磨、响应式、可访问性、文案、设计系统 | `$impeccable critique/audit/polish ...` |
+| 前端动效专项 skills | `emil-design-eng`、`apple-design`、`improve-animations`、`animation-vocabulary` | 动效设计、手势物理、全项目动画审计和术语反查 | 在需求中明确点名对应 skill |
 | 网页视觉参考图 skill | `imagegen-frontend-web` | 生成网站、Landing Page、产品页 section 参考图 | 先生成图，再交给 Codex 实现 |
 | 移动端视觉参考图 skill | `imagegen-frontend-mobile` | 生成 App 多屏、移动端流程和手机框参考图 | 先探索移动端视觉方向 |
 | 品牌视觉 skill | `brandkit` | 生成品牌板、Logo 方向、色板、字体和品牌应用 | 用于产品早期定视觉气质 |
@@ -257,6 +258,132 @@ $audit
 
 不常用时可以不管。
 
+## Skills：Emil Kowalski Design Engineering
+
+### 它们是什么
+
+这组 skills 来自 `emilkowalski/skills`，主要负责前端动效、交互手感和动画质量判断。
+
+当前保留：
+
+```text
+emil-design-eng
+apple-design
+improve-animations
+animation-vocabulary
+```
+
+`review-animations` 已卸载。它只负责严格审查动画 diff，和现有的 Impeccable 评审流程重合较多，当前没有保留必要。
+
+### 与 Impeccable 的分工
+
+```text
+Impeccable：负责页面整体设计质量、布局、颜色、字体、响应式、状态和可访问性
+Emil skills：负责动画为什么存在、怎么运动、手势是否跟手、缓动和时长是否合理
+```
+
+普通 UI 任务优先使用 Impeccable。只有任务明显涉及动画、拖拽、弹簧、手势或全项目动效治理时，再点名使用这组 skills。
+
+### `emil-design-eng`
+
+这是这组里的核心综合 skill。它负责判断动画是否应该存在，并指导缓动、时长、弹簧、组件反馈、CSS transform、clip-path、拖拽手势、性能和 reduced motion。
+
+适合：
+
+- 弹窗、Popover、Tooltip、Toast 等组件动效。
+- 按钮按压反馈和微交互。
+- 页面切换、列表进入和状态过渡。
+- 调整动画的时长、缓动和 transform origin。
+- 已经能运行，但整体手感不够自然的交互。
+
+Demo：
+
+```text
+使用 emil-design-eng 优化当前商品筛选弹层的交互动效。
+要求：
+- 先判断哪些状态真的需要动画
+- 弹层从触发按钮对应的方向出现
+- 高频操作不要拖慢
+- 支持 prefers-reduced-motion
+- 不要改变业务逻辑和页面结构
+```
+
+### `apple-design`
+
+这个 skill 把 Apple 的流体交互原则转换成 Web 实现方式，重点不是把页面做得“像苹果”，而是让手势和动画更符合物理直觉。
+
+适合：
+
+- Drawer、Sheet、Carousel 等可拖拽组件。
+- Swipe to dismiss。
+- 拖拽释放后的速度继承和动量。
+- 可被中途打断、反向操作的动画。
+- Rubber-banding、边界阻尼和回弹。
+- 需要 iOS 式直接操控感的 Web 交互。
+
+Demo：
+
+```text
+使用 apple-design 优化移动端筛选 Sheet。
+要求：
+- 拖动过程与手指 1:1 跟随
+- 释放时根据速度判断关闭还是回到原位
+- 越过边界时使用渐进阻力，不要硬停止
+- 动画进行中允许再次抓取和反向拖动
+```
+
+### `animation-vocabulary`
+
+这是一个动画术语反查表。它不负责设计或实现动画，只负责把模糊描述转换成准确术语，方便继续给 Codex、设计师或动画工具下指令。
+
+适合：
+
+- 不知道某个动画效果叫什么。
+- 想把视觉感觉整理成准确需求。
+- 区分容易混淆的动画概念。
+
+Demo：
+
+```text
+使用 animation-vocabulary 告诉我：
+“列表里的卡片不是一起出现，而是一个接一个出现”叫什么？
+```
+
+预期会得到类似：
+
+```text
+Stagger：多个项目之间带少量延迟，依次进入。
+```
+
+### `improve-animations`
+
+这个 skill 用于扫描整个代码库里的动画和动效实现，找出高优先级问题，并生成可以交给其他 Agent 执行的独立计划。它默认先审计和写计划，不直接修改业务源码。
+
+常用方式：
+
+| 用法 | 作用 |
+| --- | --- |
+| `improve-animations` | 扫描全部交互 UI，输出完整问题表 |
+| `improve-animations quick` | 只检查高频组件和高优先级问题 |
+| `improve-animations deep` | 深入检查整个项目，包括营销页面和低优先级细节 |
+| `improve-animations performance` | 只检查动画性能 |
+| `improve-animations accessibility` | 只检查 reduced motion 等可访问性问题 |
+| `improve-animations plan <描述>` | 跳过全量审计，直接为指定改进生成计划 |
+| `improve-animations reconcile` | 检查已有动画计划是否完成或已经过期 |
+
+Demo：
+
+```text
+使用 improve-animations quick 检查当前项目。
+先只输出高优先级动画问题和证据，不修改源码。
+```
+
+当前边界：
+
+- 可以使用审计、专项检查、生成计划和 reconcile。
+- 暂时不要使用 `improve-animations execute <plan>`。
+- `execute` 模式会依赖已经卸载的 `review-animations` 做专项复审；以后确实需要自动执行和复审时再重新安装。
+
 ## 图片生成类 Skills
 
 下面这几个来自 `taste-skill`，和 Impeccable 的代码优化能力有重叠的已删除，只保留图片生成类。
@@ -406,8 +533,10 @@ Demo：
 ```text
 1. $impeccable critique 页面，先只评审
 2. $impeccable polish 页面，做小范围打磨
-3. 必要时 $impeccable harden 补状态和边界
-4. 如 Codex 加了太多抽象，用 @ponytail-review 检查
+3. 页面包含复杂动效时，再用 emil-design-eng 校准手感
+4. 涉及拖拽、Sheet、Swipe 时，再用 apple-design
+5. 必要时 $impeccable harden 补状态和边界
+6. 如 Codex 加了太多抽象，用 @ponytail-review 检查
 ```
 
 ### 当前 Agent 学习项目
@@ -415,6 +544,7 @@ Demo：
 ```text
 默认不用 Ponytail 接管
 需要 UI 质量时用 Impeccable
+需要动效和手势质量时用 Emil skills
 需要视觉方向时用图片生成类 skill
 需要防止过度工程化时用 @ponytail-review
 ```
@@ -437,6 +567,10 @@ Demo：
 | 界面太复杂 | `$impeccable distill` |
 | 新功能先规划 | `$impeccable shape` |
 | 新页面从 0 到 1 | `$impeccable craft` |
+| 优化具体组件的动画手感 | `emil-design-eng` |
+| 优化拖拽、Sheet、Swipe 和弹簧交互 | `apple-design` |
+| 不知道某个动画效果叫什么 | `animation-vocabulary` |
+| 扫描整个项目的动画问题 | `improve-animations quick/deep` |
 | 网站视觉方向探索 | `imagegen-frontend-web` |
 | 移动端视觉方向探索 | `imagegen-frontend-mobile` |
 | 品牌视觉方向探索 | `brandkit` |
@@ -448,6 +582,9 @@ Demo：
 ## 使用边界
 
 - 设计、UI、视觉质量：优先 Impeccable。
+- 动画细节和组件手感：优先 `emil-design-eng`。
+- 拖拽、动量和可打断手势：优先 `apple-design`。
+- 全项目动画审计：优先 `improve-animations`，当前不使用其 `execute` 模式。
 - 视觉方向探索：优先图片生成类 skills。
 - 复杂度收敛：优先 Ponytail review/audit，不要直接默认 ultra。
 - 业务代码、Agent 学习、后端分层：优先项目 `AGENTS.md` 和本地开发约束。
